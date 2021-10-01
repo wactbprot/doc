@@ -2,6 +2,7 @@
                                 ;; Components
                                 "components/config/src"
                                 "components/customer/src"
+                                "components/db/src"
                                 "components/page/src"
 
                                 ;; Bases
@@ -24,6 +25,7 @@
                                com.brunobonacci/mulog {:mvn/version "0.6.0"}
                                com.brunobonacci/mulog-elasticsearch {:mvn/version "0.6.0"}
                                com.fzakaria/slf4j-timbre {:mvn/version "0.3.21"}}}
+            :test {:extra-paths []}
 
             :poly {:main-opts ["-m" "polylith.clj.core.poly-cli.core"]
                    :extra-deps {polyfy/polylith

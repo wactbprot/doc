@@ -2,7 +2,6 @@
   ^{:author "Thomas Bock <wactbprot@gmail.com>"
     :doc "Webserver delivers pages, reads and writes to the database."}
   (:require [compojure.route :as route]
-            [com.brunobonacci.mulog :as µ]
             [compojure.core :refer :all]
             [compojure.handler :as handler]
             [org.httpkit.server :refer [run-server]]
@@ -29,20 +28,9 @@
   (when @server (@server :timeout 100)
         (reset! server nil)))
 
-(defn start [{srv :server}]
-  (µ/log ::start :message "start server")
-  (reset! server (run-server app srv)))
+(defn start [{srv :server}] (reset! server (run-server app srv)))
 
-(defn -main [& args]
-  (µ/log ::-main :message "call -main")
-  (start c/conf))
+(defn -main [& args] (start c/conf))
 
 (comment
-  (start c/conf)
-  ;; think about wher the update happens
-  ;; is thist enough:
-  ;; POST to /customer/:cust-name endpoint with
-  ;; {:path
-  ;; :value
-  ;; :type}
-  )
+  (start c/conf))
