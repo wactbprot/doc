@@ -8,6 +8,7 @@
             [ring.middleware.json :as middleware]
             
             [wactbprot.doc.config.interface :as c]
+            [wactbprot.doc.db.interface :as db]
             [wactbprot.doc.customer.interface :as customer]
             [wactbprot.doc.page.interface :as page])
   (:gen-class))

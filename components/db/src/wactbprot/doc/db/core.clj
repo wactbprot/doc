@@ -6,8 +6,10 @@
             [org.httpkit.client :as http]))
 
 (defn result [{body :body status :status}]
-  (let [body (try (che/parse-string-strict body true )
-                  (catch Exception e {:error (.getMessage e)}))]
+  (let [body (try
+               (che/parse-string-strict body true )
+               (catch Exception e
+                 {:error (.getMessage e)}))]
     (if (< status 400)
       body
       {:error (:error body) :reason (:reason body)})))
@@ -21,7 +23,8 @@
   (when (and db-url id) (str db-url "/" id (when rev (str "?rev=" rev)))))
 
 (defn get-doc [{opt :db-opt :as conf} id]
-  (result @(http/get (doc-url conf opt))))
+  (result @(http/get (doc-url conf) opt)))
 
-(defn del-doc [conf]
-  (result @(http/delete (doc-url (assoc conn :rev (get-rev url opt))) opt)))
+(defn del-doc [{opt :db-opt :as conf} id]
+  (let [url (doc-url conf id)]
+  (result @(http/delete (doc-url (assoc conf :rev (get-rev url opt))) opt))))
