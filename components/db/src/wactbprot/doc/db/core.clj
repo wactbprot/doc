@@ -5,7 +5,7 @@
             [clojure.string :as string]
             [org.httpkit.client :as http]))
 
-(defn result [{body :body header :headers status :status url :url}]
+(defn result [{body :body status :status}]
   (let [body (try (che/parse-string-strict body true )
                   (catch Exception e {:error (.getMessage e)}))]
     (if (< status 400)
@@ -13,7 +13,9 @@
       {:error (:error body) :reason (:reason body)})))
 
 (defn get-rev [url opt]
-  (string/replace (get-in @(http/head url opt) [:headers :etag]) #"\"" ""))
+  (let [res @(http/head url opt)]
+    (when-not (contains? res :error)
+      (string/replace (get-in  [:headers :etag]) #"\"" ""))))
 
 (defn doc-url [{db-url :db-url rev :rev} id]
   (when (and db-url id) (str db-url "/" id (when rev (str "?rev=" rev)))))
