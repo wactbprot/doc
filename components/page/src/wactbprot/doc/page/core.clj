@@ -45,7 +45,7 @@
 ;; head
 ;;........................................................................
 (defn head [conf]
-  [:head [:title "repliclj"]
+  [:head [:title "doc"]
    [:meta {:charset "utf-8"}]
    [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
    (hp/include-css "/css/uikit.css")])

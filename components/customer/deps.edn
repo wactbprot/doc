@@ -1,4 +1,6 @@
 {:paths ["src" "resources"]
  :deps {}
- :aliases {:test {:extra-paths ["test"]
+ :aliases {:dev {:extra-paths [;; Components
+                                "../../components/config/src"]}
+           :test {:extra-paths ["test"]
                   :extra-deps {}}}}

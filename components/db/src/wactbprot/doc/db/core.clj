@@ -25,8 +25,7 @@
   (result @(http/get (doc-url conf id) opt)))
 
 (defn del-doc [{opt :db-opt :as conf} id]
-  (let [url (doc-url conf id)]
-    (result @(http/delete (doc-url (assoc conf :rev (get-rev conf id)) id) opt))))
+  (result @(http/delete (doc-url (assoc conf :rev (get-rev conf id)) id) opt)))
 
 (comment
   (get-doc c/conf "foo")
