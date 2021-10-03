@@ -32,12 +32,7 @@
 (defn body [conf content]
   [:body#body
    (nav conf)
-   [:div.uk-container.uk-padding.uk-margin
-    [:article.uk-article
-     [:h4.uk-article-title.uk-text-uppercase.uk-heading-line.uk-text-center.uk-text-muted
-      [:a.uk-link-reset {:href ""} "doc"]]
-     [:p.uk-article-meta "today" #_(u/date)]
-     [:p.uk-text-lead content]]]
+   [:div.uk-container.uk-padding-small.uk-margin-small content]
    (hp/include-js "/js/uikit.js")
    (hp/include-js "/js/uikit-icons.js")])
 

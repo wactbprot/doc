@@ -9,9 +9,16 @@
 
 (defn not-found [] (core/not-found))
 
+
 ;;........................................................................
 ;; components
 ;;........................................................................
-(defn form-stacked [] (component/form-stacked))
+(defn article [] (component/article))
+
+(defn form-heading [s] (component/form-heading s))
+
+(defn form [] (component/form))
 
 (defn form-text-input [data layout] (component/form-text-input data layout))
+
+(defn form-select [data layout] (component/form-select data layout))
