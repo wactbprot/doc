@@ -1,5 +1,4 @@
-{:aliases  {:dev {:extra-paths ["development/src"
-                                ;; Components
+{:aliases  {:dev {:extra-paths [;; Components
                                 "components/config/src"
                                 "components/customer/src"
                                 "components/db/src"
@@ -25,10 +24,11 @@
                                com.brunobonacci/mulog {:mvn/version "0.6.0"}
                                com.brunobonacci/mulog-elasticsearch {:mvn/version "0.6.0"}
                                com.fzakaria/slf4j-timbre {:mvn/version "0.3.21"}}}
+
             :test {:extra-paths []}
 
             :poly {:main-opts ["-m" "polylith.clj.core.poly-cli.core"]
                    :extra-deps {polyfy/polylith
                                 {:git/url   "https://github.com/polyfy/polylith"
-                                 :sha       "a3278519d9b5221142e6c2afac5da5b79381b2c2"
+                                 :sha       "8c506aab22124fa2bb51d51b8c5e008250e48322"
                                  :deps/root "projects/poly"}}}}}
