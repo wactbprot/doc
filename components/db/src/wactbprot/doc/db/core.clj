@@ -1,11 +1,13 @@
 (ns wactbprot.doc.db.core
   ^{:author "Thomas Bock <wactbprot@gmail.com>"
-    :doc "Basic database interop. Plain HTTP."}
+    :doc "Basic database interop. Plain HTTP powerd by httpkit."}
   (:require [cheshire.core :as che]
             [clojure.string :as string]
             [wactbprot.doc.config.interface :as c]
             [org.httpkit.client :as http]))
-
+;;........................................................................
+;; utils
+;;........................................................................
 (defn doc-url [{db-url :db-url rev :rev} id]
   (when (and db-url id) (str db-url "/" id (when rev (str "?rev=" rev)))))
 
@@ -21,12 +23,18 @@
     (when (< (:status res) 400)
       (string/replace (get-in  res [:headers :etag]) #"\"" ""))))
 
+;;........................................................................
+;; crud ops
+;;........................................................................
 (defn get-doc [{opt :db-opt :as conf} id]
   (result @(http/get (doc-url conf id) opt)))
 
 (defn del-doc [{opt :db-opt :as conf} id]
   (result @(http/delete (doc-url (assoc conf :rev (get-rev conf id)) id) opt)))
 
+;;........................................................................
+;; playground
+;;........................................................................
 (comment
   (get-doc c/conf "foo")
   (get-rev c/conf "000_REPLICATIONS"))

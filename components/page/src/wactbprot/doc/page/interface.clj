@@ -14,4 +14,4 @@
 ;;........................................................................
 (defn form-stacked [] (component/form-stacked))
 
-(defn form-text-input [label value path type] (component/form-text-input label value path type))
+(defn form-text-input [data layout] (component/form-text-input data layout))
