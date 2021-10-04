@@ -9,5 +9,3 @@
     :half "uk-width-1-2"
     :three-quarter "uk-width-3-4"
     :full "uk-width-1-1"))
-
-(defn data-prefix [m] (into {} (mapv (fn [[k v]] {(str "data-" (name k)) v}) m)))

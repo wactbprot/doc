@@ -16,7 +16,7 @@
 (defonce server (atom nil))
 
 (defroutes app-routes
-  (GET "/customer" [] (page/index c/conf (customer/content c/conf {})))
+  (GET "/customer/:id" [:as req] (page/index c/conf (customer/content c/conf (db/get-doc c/conf (get-in req [:route-params :id])))))
   (route/resources "/")
   (route/not-found (page/not-found)))
 
@@ -29,7 +29,7 @@
   (when @server (@server :timeout 100)
         (reset! server nil)))
 
-(defn start [{srv :server}] (reset! server (run-server app srv)))
+(defn start [{srv :server}] (reset! server (run-server #'app srv)))
 
 (defn -main [& args] (start c/conf))
 
