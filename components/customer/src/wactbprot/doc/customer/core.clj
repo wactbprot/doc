@@ -2,39 +2,58 @@
   (:require [wactbprot.doc.config.interface :as c]
             [wactbprot.doc.page.interface :as p]))
 
-(defn base-address [conf data]
+(defn content [conf data]
   (let [base-path "Customer.Address"]
     (into (p/article)
-          [(p/form-heading "Adresse")
+          [(p/form-heading "Allgemein")
            (into (p/form)
-                [(p/form-text-input {:label "Name"
+                 [(p/form-text-input {:label "Kürzel"
                                      :value "CompanyA"
-                                     :path (str base-path "Name")
+                                     :path  "Customer.Name"
                                      :type "string"}
-                                    {:width :three-quarter})
-                 (p/form-text-input {:label "Sign"
+                                     {:width :one-quarter})
+                  (p/form-text-input {:label "Debitor"
+                                      :value "CompanyA"
+                                      :path  "Customer.Name"
+                                      :type "string"}
+                                     {:width :half})
+                  (p/form-select {:label "Sprache"
+                                  :value "de"
+                                  :path (str base-path "Lang")
+                                  :type "string"
+                                  :options ["de" "en"]}
+                                 {:width :one-quarter})])
+           (p/form-heading "Adresse")
+           (into (p/form)
+                [(p/form-text-input {:label "Adresszeile 1"
+                                     :value "CompanyA"
+                                     :path  "Customer.Name"
+                                     :type "string"}
+                                    {:width :full})
+                 (p/form-text-input {:label "Adresszeile 2"
                                      :value "CA"
-                                     :path (str base-path "Name")
+                                     :path "Customer.AddName"
+                                     :type "string"}
+                                    {:width :full})
+                 (p/form-text-input {:label "Adresszeile 3"
+                                     :value "CompanyA"
+                                     :path "Customer.AddAddName"
+                                     :type "string"}
+                                    {:width :full})
+                 (p/form-text-input {:label "Straße Nr."
+                                     :value "CompanyA"
+                                     :path (str base-path "Street")
+                                     :type "string"}
+                                    {:width :full})
+                 (p/form-text-input {:label "PLZ"
+                                     :value "CompanyA"
+                                     :path (str base-path "Zipcode")
                                      :type "string"}
                                     {:width :one-quarter})
-                 (p/form-text-input {:label "AddName"
+                 (p/form-text-input {:label "Ort"
                                      :value "CompanyA"
-                                     :path (str base-path "Name")
+                                     :path (str base-path "Town")
                                      :type "string"}
-                                    {:width :three-quarter})
-                 (p/form-text-input {:label "AddAddName"
-                                     :value "CompanyA"
-                                     :path (str base-path "Name")
-                                     :type "string"}
-                                    {:width :three-quarter})
-                 (p/form-select {:label "Sprache"
-                                     :value "de"
-                                     :path (str base-path "Lang")
-                                     :type "string"
-                                     :options ["de" "en"]}
-                                    {:width :one-quarter})])])))
-
-(defn content [conf data]
-  (base-address conf data))
+                                    {:width :three-quarter})])])))
 
 
