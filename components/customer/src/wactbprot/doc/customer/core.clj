@@ -66,6 +66,12 @@
                        :data-path (str base-path "Town")
                        :data-type "string"}
                       (value data)
-                      (p/form-text-input {:width :three-quarter}))])])))
+                      (p/form-text-input {:width :half}))
+
+                  (-> {:label "Landeskürzel"
+                       :data-path (str base-path "Land")
+                       :data-type "string"}
+                      (value data)
+                      (p/form-text-input {:width :one-quarter}))])])))
 
 
