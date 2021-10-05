@@ -1,11 +1,11 @@
-(ns wactbprot.doc.customer.core
+(ns wactbprot.doc.content.customer
   (:require [wactbprot.doc.config.interface :as c]
             [wactbprot.doc.page.interface :as p]
             [clojure.string :as string]))
 
-(defn path-vector [{p :data-path}] (mapv keyword (string/split p #"\.")))
+(defn path [{p :data-path}] (mapv keyword (string/split p #"\.")))
 
-(defn value [m data] (assoc m :value (get-in data (path-vector m))))
+(defn value [m data] (assoc m :value (get-in data (path m))))
 
 (defn content [conf data]
   (let [base-path "Customer.Address."]

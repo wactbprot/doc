@@ -1,6 +1,6 @@
 {:aliases  {:dev {:extra-paths [;; Components
                                 "components/config/src"
-                                "components/customer/src"
+                                "components/content/src"
                                 "components/db/src"
                                 "components/page/src"
 
