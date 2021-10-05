@@ -22,3 +22,5 @@
 (defn form-text-input [data layout] (component/form-text-input data layout))
 
 (defn form-select [data layout] (component/form-select data layout))
+
+(defn form-checkbox [data layout] (component/form-checkbox data))

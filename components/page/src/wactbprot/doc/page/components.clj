@@ -11,18 +11,26 @@
 ;;........................................................................
 (defn form-heading [s][:h3.uk-heading-line.uk-text-center [:span s]])
 
-(defn form [] [:form.uk-form-stacked.uk-grid {:uk-grid ""}])
+(defn form [] [:form.uk-form-stacked.uk-grid.uk-child-width-auto {:uk-grid ""}])
 
-(defn form-text-input [{label :label value :value :as data} {width :width} ]
-  [:div {:class (u/width-trans width)}
-   [:label.uk-form-label {:for "form-stacked-text"} label]
-   [:div.uk-form-controls
-    [:input.uk-input
-     (merge {:id "form-stacked-text" :value value} data)]]])
+(defn label [s] [:label.uk-form-label.uk-text-muted {:for "form-stacked-text"} s])
 
-(defn form-select [{label :label value :value opts :options :as data} {width :width} ]
-  [:div {:class (u/width-trans width)}
-   [:label.uk-form-label {:for "form-stacked-text"} label]
+(defn form-checkbox [{l :label  :as data} {w :width} ]
+  [:div {:class (u/width-trans w)}
+   (label l)
    [:div.uk-form-controls
-    (into [:select.uk-select (merge {:id "form-horizontal-select" :selected value} data)]
-           (mapv (fn [s] [:option (when (= s value) {:selected ""}) s]) opts) )]])
+    [:input.uk-checkbox (merge {:type "checkbox"} data)]]])
+
+(defn form-text-input [{l :label v :value :as data} {w :width} ]
+  [:div {:class (u/width-trans w)}
+   (label l)
+   [:div.uk-form-controls
+    [:input.uk-input.uk-text-emphasis
+     (merge {:id "form-stacked-text" :value v} data)]]])
+
+(defn form-select [{l :label v :value o :options :as data} {w :width} ]
+  [:div {:class (u/width-trans w)}
+   (label l)
+   [:div.uk-form-controls
+    (into [:select.uk-select (merge {:id "form-horizontal-select" :selected v} data)]
+           (mapv (fn [s] [:option (when (= s v) {:selected ""}) s]) o) )]])
