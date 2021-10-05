@@ -9,10 +9,14 @@
 
 (defn not-found [] (core/not-found))
 
-
 ;;........................................................................
 ;; components
 ;;........................................................................
+
+(defn acc-frame [] (component/acc-frame))
+
+(defn acc-sheet [title content] (component/acc-sheet title content))
+
 (defn article [] (component/article))
 
 (defn form-heading [s] (component/form-heading s))
@@ -23,4 +27,4 @@
 
 (defn form-select [data layout] (component/form-select data layout))
 
-(defn form-checkbox [data layout] (component/form-checkbox data))
+(defn form-checkbox [data layout] (component/form-checkbox data layout))

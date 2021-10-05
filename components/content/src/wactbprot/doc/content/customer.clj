@@ -101,13 +101,18 @@
 
 
 (defn content [conf data]
-  (let [base-path "Customer.Address."]
-    (into (p/article)
-          [(p/form-heading "Allgemein")
-           (into (p/form) (main data))
-           (p/form-heading "Adresse")
-           (into (p/form) (address data))
-           (p/form-heading "Kontakt")
-           (into (p/form) (contact data))])))
+  (into (p/acc-frame)
+        [(p/acc-sheet "Adresse/Kontakt"
+                      (into (p/article)
+                            [(p/form-heading "Allgemein")
+                             (into (p/form) (main data))
+                             (p/form-heading "Adresse")
+                             (into (p/form) (address data))
+                             (p/form-heading "Kontakt")
+                             (into (p/form) (contact data))]) {:open true})
+         (p/acc-sheet "Versand"  "mmm")
+         (p/acc-sheet "Rechnung" "llll")
+         (p/acc-sheet "Adressen"  "mmm")
+         (p/acc-sheet "Kontakte"  "mmm")]))
 
 
