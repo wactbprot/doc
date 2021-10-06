@@ -16,7 +16,7 @@
 (defonce server (atom nil))
 
 (defroutes app-routes
-  (GET "/customer/:id" [:as req] (page/index c/conf (content/customer c/conf (db/get-doc c/conf (get-in req [:route-params :id])))))
+  (GET "/customer/:id" [:as req] (page/index (content/customer (db/get-doc c/conf (get-in req [:route-params :id])))))
   (route/resources "/")
   (route/not-found (page/not-found)))
 

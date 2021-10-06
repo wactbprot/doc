@@ -5,7 +5,7 @@
 ;;........................................................................
 ;; page
 ;;........................................................................
-(defn index [conf content] (core/index conf content)) 
+(defn index [content] (core/index content)) 
 
 (defn not-found [] (core/not-found))
 
@@ -15,7 +15,9 @@
 
 (defn acc-frame [] (component/acc-frame))
 
-(defn acc-sheet [title content] (component/acc-sheet title content))
+(defn acc-sheet
+  ([title content] (component/acc-sheet title content {:open false}))
+  ([title content layout] (component/acc-sheet title content layout)))
 
 (defn article [] (component/article))
 

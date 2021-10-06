@@ -8,18 +8,15 @@
 
 (defn acc-frame [] [:ul {:uk-accordion "collapsible: false"}])
 
-(defn acc-sheet
-  ([title content]
-   (acc-sheet title content {:open false}))
-  ([title content {o :open}]
-   [:li (when o {:class "uk-open"})
-    [:a.uk-accordion-title {:href "#"} title]
-    [:div.uk-accordion-content content]]))
+(defn acc-sheet [title content {o :open}]
+  [:li (when o {:class "uk-open"})
+   [:a.uk-accordion-title.uk-text-muted {:href "#"} title]
+    [:div.uk-accordion-content content]])
 
 ;;........................................................................
 ;; form
 ;;........................................................................
-(defn form-heading [s][:h3.uk-heading-line.uk-text-center [:span s]])
+(defn form-heading [s][:h4.uk-heading-line.uk-text-center.uk-text-muted [:span s]])
 
 (defn form [] [:form.uk-form-stacked.uk-grid.uk-child-width-auto {:uk-grid ""}])
 

@@ -14,8 +14,12 @@
 ;;........................................................................
 ;; nav
 ;;........................................................................
-(defn nav [conf]
-  [:div.uk-navbar-container
+(defn nav []
+  [:div.uk-section-primary.uk-preserve-color
+
+    [:div {:uk-sticky "animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; cls-inactive: uk-navbar-transparent uk-light; top: 200"}
+
+  [:nav.uk-navbar-container
    {:uk-navbar ""}
    [:div.uk-navbar-center
     [:ul.uk-navbar-nav
@@ -24,22 +28,22 @@
      [:li [:a {:target "_blank"
                :href "http://a75438:5601/app/discover#/view/6fde0090-06ff-11ec-a0ed-9fa5b8b37aed"} "elasticsearch"]]
      [:li [:a { :target "_blank"
-               :href "https://docs.couchdb.org/en/main/replication/index.html"} "repli docu"]]]]])
+               :href "https://docs.couchdb.org/en/main/replication/index.html"} "repli docu"]]]]]]])
 
 ;;........................................................................
 ;; body
 ;;........................................................................
-(defn body [conf content]
+(defn body [content]
   [:body#body
-   (nav conf)
-   [:div.uk-container.uk-padding-small.uk-margin-small content]
+   (nav)
+   [:div.uk-container.uk-padding-small.uk-margin-smal.uk-text-smalll content]
    (hp/include-js "/js/uikit.js")
    (hp/include-js "/js/uikit-icons.js")])
 
 ;;........................................................................
 ;; head
 ;;........................................................................
-(defn head [conf]
+(defn head []
   [:head [:title "doc"]
    [:meta {:charset "utf-8"}]
    [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
@@ -48,7 +52,4 @@
 ;;........................................................................
 ;; index
 ;;........................................................................
-(defn index [conf content]
-  (hp/html5
-   (head conf)
-   (body conf content)))
+(defn index [content] (hp/html5 (head) (body content)))
