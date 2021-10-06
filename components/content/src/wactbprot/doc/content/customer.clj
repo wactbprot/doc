@@ -1,60 +1,58 @@
 (ns wactbprot.doc.content.customer
   (:require [wactbprot.doc.config.interface :as c]
             [wactbprot.doc.page.interface :as p]
+            [wactbprot.doc.content.utils :as u]
             [clojure.string :as string]))
 
-(defn str->path-element [s]
-  (if (re-matches #"[0-9]*" s)
-    (Integer/parseInt s)
-    (keyword s))) 
 
-(defn path
-  "Converts string path to vector.
-  Example:
-  ```clojure
-  (def t {:w [{:m 1}]})
-  (get-in t (path \"w.0.m\"))
-  ```"
-  [s]
-  (mapv str->path-element (string/split s #"\.")))
+(defn cmd-replace-address [path]
+  (into (p/grid)
+        [(-> {:data-cmd :customer-alt-address
+              :data-path path}
+             (p/button "Rechnung"))
+         (-> {:data-cmd :customer-alt-address
+              :data-path path}
+             (p/button "Versand"))
+         (-> {:data-cmd :customer-alt-address
+              :data-path path}
+             (p/button "Haupt"))]))
 
-(defn info [m data] (assoc m :value (get-in data (path (:data-path m)))))
 
 (defn category [data base layout]
   (-> {:label "Kategorie"
        :data-path  (str base "Category")
        :options ["EU-Ausland" "Inland" "Ausland"]}
-      (info data)
+      (u/info data)
       (p/form-select layout)))
 
 (defn gender [data base layout]
   (-> {:label "Geschlecht"
        :data-path  (str base "Gender")
        :options ["" "female" "male" "other"]}
-      (info data)
+      (u/info data)
       (p/form-select layout)))
 
 (defn lang [data base layout]
   (-> {:label "Sprache"
        :data-path  (str base "Lang")
        :options ["de" "en"]}
-      (info data)
+      (u/info data)
       (p/form-select layout)))
 
 (defn contact [data base]
   [(-> {:label "Name"
         :data-path  (str base "Name")}
-       (info data)
+       (u/info data)
        (p/form-text-input {:width :one-quarter}))
 
    (-> {:label "Email"
         :data-path  (str base "Email")}
-       (info data)
+       (u/info data)
        (p/form-text-input {:width :one-quarter}))
 
    (-> {:label "Telefon"
         :data-path  (str base "Phone")}
-       (info data)
+       (u/info data)
        (p/form-text-input {:width :one-quarter}))
 
    (gender data base {:width :one-quarter})])
@@ -64,66 +62,66 @@
   (let [base "Customer."]
   [(-> {:label "Kürzel"
         :data-path  (str base "Sign")}
-       (info data)
+       (u/info data)
        (p/form-text-input {:width :one-quarter}))
 
    (-> {:label "Debitor"
         :data-path  (str base "DebitorenNr")
         :data-type "int"}
-       (info data)
+       (u/info data)
        (p/form-text-input {:width :half}))
 
    (-> {:label "Sprache"
         :data-path  (str base "Lang")
         :options ["de" "en"]}
-       (info data)
+       (u/info data)
        (p/form-select {:width :one-quarter}))
 
    (-> {:label "Kommentar"
         :data-path  (str base "Comment")}
-       (info data)
+       (u/info data)
        (p/form-text-input {:width :full}))]))
 
 (defn address-name [data base layout prop-name] 
   [(-> {:label "Adresszeile 1"
         :data-path  (str base prop-name)}
-       (info data)
+       (u/info data)
        (p/form-text-input layout))])
 
 (defn address-tail [data base]
   [(-> {:label "Adresszeile 2"
         :data-path (str base "AddName")}
-       (info data)
+       (u/info data)
        (p/form-text-input {:width :half}))
    
    (-> {:label "Adresszeile 3"
         :data-path (str base "AddAddName")}
-       (info data)
+       (u/info data)
        (p/form-text-input {:width :half}))
 
    (-> {:label "Straße Nr."
         :data-path (str base "Address.Street")}
-       (info data)
+       (u/info data)
        (p/form-text-input {:width :half}))
 
    (-> {:label "PLZ"
         :data-path (str base "Address.Zipcode")}
-       (info data)
+       (u/info data)
        (p/form-text-input {:width :one-quarter}))
 
    (-> {:label "Bezirk/Distrikt"
         :data-path (str base "Address.District")}
-       (info data)
+       (u/info data)
        (p/form-text-input {:width :one-quarter}))
 
    (-> {:label "Ort"
         :data-path (str base "Address.Town")}
-       (info data)
+       (u/info data)
        (p/form-text-input {:width :half}))
 
    (-> {:label "Landeskürzel"
         :data-path (str base "Address.Land")}
-       (info data)
+       (u/info data)
        (p/form-text-input {:width :one-quarter}))
    
    (category data (str base "Address.") {:width :one-quarter})])
@@ -155,9 +153,9 @@
                              (into (p/form) (main-contact data))]) {:open true})
          (p/acc-sheet "Versand"
                       (into (p/article)
-                            [(p/form-heading "Versand Adresse")
+                            [(p/form-heading "Versandadresse")
                              (into (p/form) (sub-address data "Customer.Shipping."))
-                             (p/form-heading "Versand Kontakt")
+                             (p/form-heading "Versandkontakt")
                              (into (p/form) (shipping-contact data))]))
          (p/acc-sheet "Rechnung"
                       (into (p/article)
@@ -168,10 +166,13 @@
          (p/acc-sheet "Auswahl Adressen"
                       (into (p/article)
                             [(p/form-heading "Alternative 1")
+                             (cmd-replace-address "Customer.AltAddress.0")
                              (into (p/form) (sub-address data "Customer.AltAddress.0"))
                              (p/form-heading "Alternative 2")
+                             (cmd-replace-address "Customer.AltAddress.1")
                              (into (p/form) (sub-address data "Customer.AltAddress.1"))
                              (p/form-heading "Alternative 3")
+                             (cmd-replace-address "Customer.AltAddress.2")
                              (into (p/form) (sub-address data "Customer.AltAddress.2")) ]))
          (p/acc-sheet "Auswahl Kontakte"
                       (into (p/article)

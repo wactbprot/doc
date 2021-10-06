@@ -15,11 +15,16 @@
 
 (defn acc-frame [] (component/acc-frame))
 
+(defn button [data text] (component/button data text))
+
+
 (defn acc-sheet
   ([title content] (component/acc-sheet title content {:open false}))
   ([title content layout] (component/acc-sheet title content layout)))
 
 (defn article [] (component/article))
+
+(defn grid [] (component/grid))
 
 (defn form-heading [s] (component/form-heading s))
 
