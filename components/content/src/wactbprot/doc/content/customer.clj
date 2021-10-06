@@ -3,10 +3,22 @@
             [wactbprot.doc.page.interface :as p]
             [clojure.string :as string]))
 
-(defn path [{p :data-path}] (mapv keyword (string/split p #"\.")))
+(defn str->path-element [s]
+  (if (re-matches #"[0-9]*" s)
+    (Integer/parseInt s)
+    (keyword s))) 
 
-(defn info [m data] (assoc m :value (get-in data (path m))))
+(defn path
+  "Converts string path to vector.
+  Example:
+  ```clojure
+  (def t {:w [{:m 1}]})
+  (get-in t (path \"w.0.m\"))
+  ```"
+  [s]
+  (mapv str->path-element (string/split s #"\.")))
 
+(defn info [m data] (assoc m :value (get-in data (path (:data-path m)))))
 
 (defn category [data base layout]
   (-> {:label "Kategorie"
@@ -133,7 +145,7 @@
 
 (defn content [data]
   (into (p/acc-frame)
-        [(p/acc-sheet "Allgemein/Adresse/Kontakt"
+        [(p/acc-sheet "Adresse und Kontakt"
                       (into (p/article)
                             [(p/form-heading "Allgemein")
                              (into (p/form) (main data))
@@ -153,7 +165,21 @@
                              (into (p/form) (sub-address data "Customer.Invoice"))
                              (p/form-heading "Rechnungskontakt")
                              (into (p/form) (invoice-contact data))]))
-         (p/acc-sheet "Auswahl Adressen"  "mmm")
-         (p/acc-sheet "Auswahl Kontakte"  "mmm")]))
+         (p/acc-sheet "Auswahl Adressen"
+                      (into (p/article)
+                            [(p/form-heading "Alternative 1")
+                             (into (p/form) (sub-address data "Customer.AltAddress.0"))
+                             (p/form-heading "Alternative 2")
+                             (into (p/form) (sub-address data "Customer.AltAddress.1"))
+                             (p/form-heading "Alternative 3")
+                             (into (p/form) (sub-address data "Customer.AltAddress.2")) ]))
+         (p/acc-sheet "Auswahl Kontakte"
+                      (into (p/article)
+                            [(p/form-heading "Alternative 1")
+                             (into (p/form) (contact data "Customer.AltContact.0"))
+                             (p/form-heading "Alternative 1")
+                             (into (p/form) (contact data "Customer.AltContact.1"))
+                             (p/form-heading "Alternative 1")
+                             (into (p/form) (contact data "Customer.AltContact.2")) ]))]))
 
 

@@ -6,12 +6,13 @@
 
 (defn article [] [:article.uk-article])
 
-(defn acc-frame [] [:ul {:uk-accordion "collapsible: false"}])
+(defn acc-frame [] [:ul {:uk-accordion ""}]) ;; collapsible: false
 
 (defn acc-sheet [title content {o :open}]
   [:li (when o {:class "uk-open"})
    [:a.uk-accordion-title.uk-text-muted {:href "#"} title]
-    [:div.uk-accordion-content content]])
+   [:div.uk-accordion-content
+    [:div.uk-card.uk-card-body.uk-background-muted content]]])
 
 ;;........................................................................
 ;; form
