@@ -37,6 +37,8 @@
   [:body#body
    (nav)
    [:div.uk-container.uk-padding-small.uk-margin-smal.uk-text-smalll content]
+   (hp/include-js "/js/jquery.js")
+   (hp/include-js "/js/doc.js")
    (hp/include-js "/js/uikit.js")
    (hp/include-js "/js/uikit-icons.js")])
 

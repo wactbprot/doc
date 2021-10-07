@@ -1,4 +1,4 @@
-(ns wactbprot.doc.content.customer
+(ns wactbprot.doc.content.cus-out
   (:require [wactbprot.doc.config.interface :as c]
             [wactbprot.doc.page.interface :as p]
             [wactbprot.doc.content.utils :as u]
@@ -16,7 +16,6 @@
          (-> {:data-cmd :customer-alt-address
               :data-path path}
              (p/button "Haupt"))]))
-
 
 (defn category [data base layout]
   (-> {:label "Kategorie"
@@ -152,46 +151,47 @@
   (into (address-name data base {:width :full} "CustomerName")
         (address-tail data base)))
 
-(defn content [data]
-  (into (p/acc-frame)
-        [(p/acc-sheet "Adresse und Kontakt"
-                      (into (p/article)
-                            [(p/form-heading "Allgemein")
-                             (into (p/form) (main data))
-                             (p/form-heading "Adresse")
-                             (into (p/form) (main-address data))
-                             (p/form-heading "Kontakt")
-                             (into (p/form) (main-contact data))]) {:open true})
-         (p/acc-sheet "Versand"
-                      (into (p/article)
-                            [(p/form-heading "Versandadresse")
-                             (into (p/form) (sub-address data "Customer.Shipping."))
-                             (p/form-heading "Versandkontakt")
-                             (into (p/form) (shipping-contact data))]))
-         (p/acc-sheet "Rechnung"
-                      (into (p/article)
-                            [(p/form-heading "Rechnungsadresse")
-                             (into (p/form) (sub-address data "Customer.Invoice"))
-                             (p/form-heading "Rechnungskontakt")
-                             (into (p/form) (invoice-contact data))]))
-         (p/acc-sheet "Auswahl Adressen"
-                      (into (p/article)
-                            [(p/form-heading "Alternative 1")
-                             (cmd-replace-address "Customer.AltAddress.0")
-                             (into (p/form) (sub-address data "Customer.AltAddress.0"))
-                             (p/form-heading "Alternative 2")
-                             (cmd-replace-address "Customer.AltAddress.1")
-                             (into (p/form) (sub-address data "Customer.AltAddress.1"))
-                             (p/form-heading "Alternative 3")
-                             (cmd-replace-address "Customer.AltAddress.2")
-                             (into (p/form) (sub-address data "Customer.AltAddress.2")) ]))
-         (p/acc-sheet "Auswahl Kontakte"
-                      (into (p/article)
-                            [(p/form-heading "Alternative 1")
-                             (into (p/form) (contact data "Customer.AltContact.0"))
-                             (p/form-heading "Alternative 1")
-                             (into (p/form) (contact data "Customer.AltContact.1"))
-                             (p/form-heading "Alternative 1")
-                             (into (p/form) (contact data "Customer.AltContact.2")) ]))]))
+(defn out [data]
+  (p/index
+   (into (p/acc-frame)
+         [(p/acc-sheet "Adresse und Kontakt"
+                       (into (p/article)
+                             [(p/form-heading "Allgemein")
+                              (into (p/form) (main data))
+                              (p/form-heading "Adresse")
+                              (into (p/form) (main-address data))
+                              (p/form-heading "Kontakt")
+                              (into (p/form) (main-contact data))]) {:open true})
+          (p/acc-sheet "Versand"
+                       (into (p/article)
+                             [(p/form-heading "Versandadresse")
+                              (into (p/form) (sub-address data "Customer.Shipping."))
+                              (p/form-heading "Versandkontakt")
+                              (into (p/form) (shipping-contact data))]))
+          (p/acc-sheet "Rechnung"
+                       (into (p/article)
+                             [(p/form-heading "Rechnungsadresse")
+                              (into (p/form) (sub-address data "Customer.Invoice"))
+                              (p/form-heading "Rechnungskontakt")
+                              (into (p/form) (invoice-contact data))]))
+          (p/acc-sheet "Auswahl Adressen"
+                       (into (p/article)
+                             [(p/form-heading "Alternative 1")
+                              (cmd-replace-address "Customer.AltAddress.0")
+                              (into (p/form) (sub-address data "Customer.AltAddress.0"))
+                              (p/form-heading "Alternative 2")
+                              (cmd-replace-address "Customer.AltAddress.1")
+                              (into (p/form) (sub-address data "Customer.AltAddress.1"))
+                              (p/form-heading "Alternative 3")
+                              (cmd-replace-address "Customer.AltAddress.2")
+                              (into (p/form) (sub-address data "Customer.AltAddress.2")) ]))
+          (p/acc-sheet "Auswahl Kontakte"
+                       (into (p/article)
+                             [(p/form-heading "Alternative 1")
+                              (into (p/form) (contact data "Customer.AltContact.0"))
+                              (p/form-heading "Alternative 1")
+                              (into (p/form) (contact data "Customer.AltContact.1"))
+                              (p/form-heading "Alternative 1")
+                              (into (p/form) (contact data "Customer.AltContact.2")) ]))])))
 
 

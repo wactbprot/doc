@@ -9,14 +9,15 @@
             
             [wactbprot.doc.config.interface :as c]
             [wactbprot.doc.db.interface :as db]
-            [wactbprot.doc.content.interface :as content]
+            [wactbprot.doc.content.interface :as io]
             [wactbprot.doc.page.interface :as page])
   (:gen-class))
 
 (defonce server (atom nil))
 
 (defroutes app-routes
-  (GET "/customer/:id" [:as req] (page/index (content/customer (db/get-doc c/conf (get-in req [:route-params :id])))))
+  (GET "/customer/:id" [:as req] (io/cus-out (db/get-doc c/conf (get-in req [:route-params :id]))))
+  (POST "/customer/:id" [:as req] (io/cus-in  (:body req) (db/get-doc c/conf (get-in req [:route-params :id]))))
   (route/resources "/")
   (route/not-found (page/not-found)))
 

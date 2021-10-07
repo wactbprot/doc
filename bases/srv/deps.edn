@@ -1,5 +1,5 @@
 {:paths ["src" "resources"]
-
+ :deps {}
  :aliases  {:dev {:extra-paths [;; Components
                                 "../../components/config/src"
                                 "../../components/content/src"

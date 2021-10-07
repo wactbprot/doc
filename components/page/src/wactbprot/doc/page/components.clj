@@ -14,7 +14,7 @@
    [:div.uk-accordion-content
     [:div.uk-card.uk-card-body.uk-background-muted content]]])
 
-(defn button [data text] [:button.uk-button.uk-button-default (merge {} data) text])
+(defn button [data text] [:button.uk-button.uk-button-default.doc-button  (merge {} data) text])
 
 (defn grid [] [:div {:class "uk-grid-small uk-child-width-expand@s" :uk-grid ""}])
 
@@ -28,22 +28,16 @@
 
 (defn form [] [:form.uk-form-stacked.uk-grid.uk-child-width-auto {:uk-grid ""}])
 
-(defn form-checkbox [{l :label  :as data} {w :width} ]
-  [:div {:class (u/width-trans w)}
-   (label l)
-   [:div.uk-form-controls
-    [:input.uk-checkbox (merge {:type "checkbox"} data)]]])
-
 (defn form-text-input [{l :label v :value :as data} {w :width} ]
   [:div {:class (u/width-trans w)}
    (label l)
    [:div.uk-form-controls
-    [:input.uk-input.uk-text-emphasis
+    [:input.uk-input.uk-text-emphasis.doc-text
      (merge {:id "form-stacked-text" :value v} data)]]])
 
 (defn form-select [{l :label v :value o :options :as data} {w :width} ]
   [:div {:class (u/width-trans w)}
    (label l)
    [:div.uk-form-controls
-    (into [:select.uk-select (merge {:id "form-horizontal-select" :selected v} data)]
+    (into [:select.uk-select.doc-select (merge {:id "form-horizontal-select" :selected v} data)]
            (mapv (fn [s] [:option (when (= s v) {:selected ""}) s]) o) )]])
