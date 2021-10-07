@@ -32,6 +32,9 @@
 (defn del-doc [{opt :db-opt :as conf} id]
   (result @(http/delete (doc-url (assoc conf :rev (get-rev conf id)) id) opt)))
 
+(defn put-doc [{opt :db-opt :as conf} {id :_id :as doc}]
+  (result @(http/put (doc-url conf id) (assoc opt :body (che/encode doc)))))
+
 ;;........................................................................
 ;; playground
 ;;........................................................................

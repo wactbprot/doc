@@ -4,16 +4,15 @@
             [wactbprot.doc.content.utils :as u]
             [clojure.string :as string]))
 
-
 (defn cmd-replace-address [path]
   (into (p/grid)
-        [(-> {:data-cmd :customer-alt-address
+        [(-> {:data-cmd :invoice-alt-address
               :data-path path}
              (p/button "Rechnung"))
-         (-> {:data-cmd :customer-alt-address
+         (-> {:data-cmd :shipping-alt-address
               :data-path path}
              (p/button "Versand"))
-         (-> {:data-cmd :customer-alt-address
+         (-> {:data-cmd :main-alt-address
               :data-path path}
              (p/button "Haupt"))]))
 
@@ -177,21 +176,21 @@
           (p/acc-sheet "Auswahl Adressen"
                        (into (p/article)
                              [(p/form-heading "Alternative 1")
-                              (cmd-replace-address "Customer.AltAddress.0")
-                              (into (p/form) (sub-address data "Customer.AltAddress.0"))
+                              (cmd-replace-address "Customer.AltAddress.0.")
+                              (into (p/form) (sub-address data "Customer.AltAddress.0."))
                               (p/form-heading "Alternative 2")
-                              (cmd-replace-address "Customer.AltAddress.1")
-                              (into (p/form) (sub-address data "Customer.AltAddress.1"))
+                              (cmd-replace-address "Customer.AltAddress.1.")
+                              (into (p/form) (sub-address data "Customer.AltAddress.1."))
                               (p/form-heading "Alternative 3")
-                              (cmd-replace-address "Customer.AltAddress.2")
-                              (into (p/form) (sub-address data "Customer.AltAddress.2")) ]))
+                              (cmd-replace-address "Customer.AltAddress.2.")
+                              (into (p/form) (sub-address data "Customer.AltAddress.2.")) ]))
           (p/acc-sheet "Auswahl Kontakte"
                        (into (p/article)
                              [(p/form-heading "Alternative 1")
-                              (into (p/form) (contact data "Customer.AltContact.0"))
+                              (into (p/form) (contact data "Customer.AltContact.0."))
                               (p/form-heading "Alternative 1")
-                              (into (p/form) (contact data "Customer.AltContact.1"))
+                              (into (p/form) (contact data "Customer.AltContact.1."))
                               (p/form-heading "Alternative 1")
-                              (into (p/form) (contact data "Customer.AltContact.2")) ]))])))
+                              (into (p/form) (contact data "Customer.AltContact.2.")) ]))])))
 
 

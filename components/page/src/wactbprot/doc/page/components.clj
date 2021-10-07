@@ -32,12 +32,12 @@
   [:div {:class (u/width-trans w)}
    (label l)
    [:div.uk-form-controls
-    [:input.uk-input.uk-text-emphasis.doc-text
+    [:input.uk-input.uk-text-emphasis.doc-input
      (merge {:id "form-stacked-text" :value v} data)]]])
 
 (defn form-select [{l :label v :value o :options :as data} {w :width} ]
   [:div {:class (u/width-trans w)}
    (label l)
    [:div.uk-form-controls
-    (into [:select.uk-select.doc-select (merge {:id "form-horizontal-select" :selected v} data)]
-           (mapv (fn [s] [:option (when (= s v) {:selected ""}) s]) o) )]])
+    (into [:select.uk-select.doc-input (merge {:id "form-horizontal-select" :selected v} data)]
+           (mapv (fn [s] [:option (when (= s v) {:selected "" :value s}) s]) o) )]])

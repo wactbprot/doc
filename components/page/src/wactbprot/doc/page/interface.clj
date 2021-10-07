@@ -17,7 +17,6 @@
 
 (defn button [data text] (component/button data text))
 
-
 (defn acc-sheet
   ([title content] (component/acc-sheet title content {:open false}))
   ([title content layout] (component/acc-sheet title content layout)))
@@ -33,5 +32,3 @@
 (defn form-text-input [data layout] (component/form-text-input data layout))
 
 (defn form-select [data layout] (component/form-select data layout))
-
-(defn form-checkbox [data layout] (component/form-checkbox data layout))

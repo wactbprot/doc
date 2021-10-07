@@ -17,7 +17,8 @@
 
 (defroutes app-routes
   (GET "/customer/:id" [:as req] (io/cus-out (db/get-doc c/conf (get-in req [:route-params :id]))))
-  (POST "/customer/:id" [:as req] (io/cus-in  (:body req) (db/get-doc c/conf (get-in req [:route-params :id]))))
+  #_(POST "/customer/:id" [:as req] (db/put-doc c/conf (io/cus-in  (:body req) (db/get-doc c/conf (get-in req [:route-params :id])))))
+  (POST "/customer/:id" [:as req]  (io/cus-in  (:body req) (db/get-doc c/conf (get-in req [:route-params :id]))))
   (route/resources "/")
   (route/not-found (page/not-found)))
 

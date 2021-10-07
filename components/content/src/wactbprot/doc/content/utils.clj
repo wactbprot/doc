@@ -1,6 +1,7 @@
 (ns wactbprot.doc.content.utils
   (:require [clojure.string :as string]))
 
+
 (defn str->path-element [s]
   (if (re-matches #"[0-9]*" s) (Integer/parseInt s) (keyword s))) 
 
@@ -15,3 +16,9 @@
   (mapv str->path-element (string/split s #"\.")))
 
 (defn info [m data] (assoc m :value (get-in data (path (:data-path m)))))
+
+(defn value [t v]
+  (condp = (keyword t)
+    :int (BigInteger. v)
+    :float (Float/parseFloat v)
+    v))

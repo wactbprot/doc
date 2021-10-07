@@ -14,8 +14,14 @@ var post = (data, callback) => {
 var reload = () => {
     location.reload(true);
 };
+
 //----------------------------------
-$(".doc-text").change( e => {
+$(".doc-input").change( e => {
     var $this = $(e.currentTarget);
     post({"value": $this.val(), "path": $this.data("path"), "type":$this.data("type")});
+});
+
+$(".doc-button").click( e => {
+    var $this = $(e.currentTarget);
+    post({"path": $this.data("path"), "cmd":$this.data("cmd")});
 });
