@@ -39,6 +39,15 @@
       (u/info data)
       (p/form-select layout)))
 
+
+(defn company-type [data base layout]
+  (-> {:label "Typ"
+       :data-path  (str base "Type")
+       :options ["" "Firma" "DAkkS" "NMI" "NMI/DI" "PTB" "Sonstige"]}
+      (u/info data)
+      (p/form-select layout)))
+
+
 (defn contact [data base]
   [(-> {:label "Name"
         :data-path  (str base "Name")}
@@ -69,7 +78,9 @@
         :data-path  (str base "DebitorenNr")
         :data-type "int"}
        (u/info data)
-       (p/form-text-input {:width :half}))
+       (p/form-text-input {:width :one-quarter}))
+
+   (company-type data base {:width :one-quarter})
 
    (-> {:label "Sprache"
         :data-path  (str base "Lang")

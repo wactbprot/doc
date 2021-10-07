@@ -17,15 +17,16 @@
 (defn button [data text] [:button.uk-button.uk-button-default (merge {} data) text])
 
 (defn grid [] [:div {:class "uk-grid-small uk-child-width-expand@s" :uk-grid ""}])
+
+(defn label [s]
+  (when (seq s) [:label.uk-form-label.uk-text-muted {:for "form-stacked-text"} s]))
+
 ;;........................................................................
 ;; form
 ;;........................................................................
 (defn form-heading [s][:h4.uk-heading-line.uk-text-center.uk-text-muted [:span s]])
 
 (defn form [] [:form.uk-form-stacked.uk-grid.uk-child-width-auto {:uk-grid ""}])
-
-(defn label [s]
-  (when (seq s) [:label.uk-form-label.uk-text-muted {:for "form-stacked-text"} s]))
 
 (defn form-checkbox [{l :label  :as data} {w :width} ]
   [:div {:class (u/width-trans w)}
