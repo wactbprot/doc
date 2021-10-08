@@ -14,7 +14,7 @@
    [:div.uk-accordion-content
     [:div.uk-card.uk-card-body.uk-background-muted content]]])
 
-(defn button [data text] [:button.uk-button.uk-button-default.doc-button  (merge {} data) text])
+(defn button [data text] [:button.uk-button.uk-button-primary.uk-button-small.doc-button  (merge {} data) text])
 
 (defn grid [] [:div {:class "uk-grid-small uk-child-width-expand@s" :uk-grid ""}])
 
