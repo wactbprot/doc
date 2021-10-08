@@ -25,6 +25,8 @@
 
 (defn grid [] (component/grid))
 
+(defn margin [] (component/margin))
+
 (defn form-heading [s] (component/form-heading s))
 
 (defn form [] (component/form))
