@@ -16,6 +16,18 @@
               :data-path path}
              (p/button "Haupt"))]))
 
+(defn cmd-replace-contact [path]
+  (into (p/grid)
+        [(-> {:data-cmd :invoice-alt-contact
+              :data-path path}
+             (p/button "Rechnung"))
+         (-> {:data-cmd :shipping-alt-contact
+              :data-path path}
+             (p/button "Versand"))
+         (-> {:data-cmd :main-alt-contact
+              :data-path path}
+             (p/button "Haupt"))]))
+
 (defn category [data base layout]
   (-> {:label "Kategorie"
        :data-path  (str base "Category")
@@ -187,10 +199,13 @@
           (p/acc-sheet "Auswahl Kontakte"
                        (into (p/article)
                              [(p/form-heading "Alternative 1")
+                              (cmd-replace-contact "Customer.AltContact.0.")
                               (into (p/form) (contact data "Customer.AltContact.0."))
                               (p/form-heading "Alternative 1")
+                              (cmd-replace-contact "Customer.AltContact.1.")
                               (into (p/form) (contact data "Customer.AltContact.1."))
                               (p/form-heading "Alternative 1")
+                              (cmd-replace-contact "Customer.AltContact.2.")
                               (into (p/form) (contact data "Customer.AltContact.2.")) ]))])))
 
 

@@ -18,6 +18,8 @@
 
 (defn grid [] [:div {:class "uk-grid-small uk-child-width-expand@s" :uk-grid ""}])
 
+(defn margin [] [:p {:uk-margin ""}])
+
 (defn label [s]
   (when (seq s) [:label.uk-form-label.uk-text-muted {:for "form-stacked-text"} s]))
 

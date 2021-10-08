@@ -4,7 +4,7 @@
                :db-prot "http"
                :db-host (or (System/getenv "DB_HOST") "localhost")
                :db-port 5984
-               :db-name "vl_db"
+               :db-name "doc_test"
                :db-usr (System/getenv "CAL_USR")
                :db-pwd (System/getenv "CAL_PWD")})
 
