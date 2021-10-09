@@ -4,59 +4,50 @@
             [wactbprot.doc.content.utils :as u]
             [clojure.string :as string]))
 
+(defn cmd-map [cmd path] {:data-cmd cmd :data-path path})
+(defn opt-map [opt path label]  {:label label :data-path  path :options opt})
+(defn inp-map [path label] {:label label :data-path  path})
+
 (defn cmd-replace-address [path]
   (into (p/grid)
-        [(-> {:data-cmd :invoice-alt-address
-              :data-path path}
+        [(-> (cmd-map :invoice-alt-address path)
              (p/button "Rechnung"))
-         (-> {:data-cmd :shipping-alt-address
-              :data-path path}
+
+         (-> (cmd-map  :shipping-alt-address path)
              (p/button "Versand"))
-         (-> {:data-cmd :main-alt-address
-              :data-path path}
+
+         (-> (cmd-map :main-alt-address path)
              (p/button "Haupt"))]))
 
 (defn cmd-replace-contact [path]
   (into (p/grid)
-        [(-> {:data-cmd :invoice-alt-contact
-              :data-path path}
+        [(-> (cmd-map :invoice-alt-contact path)
              (p/button "Rechnung"))
-         (-> {:data-cmd :shipping-alt-contact
-              :data-path path}
+         (-> (cmd-map :shipping-alt-contact path)
              (p/button "Versand"))
-         (-> {:data-cmd :main-alt-contact
-              :data-path path}
+         (-> (cmd-map :main-alt-contact path)
              (p/button "Haupt"))]))
 
 (defn category [data base layout]
-  (-> {:label "Kategorie"
-       :data-path  (str base "Category")
-       :options ["EU-Ausland" "Inland" "Ausland"]}
+  (-> (opt-map ["EU-Ausland" "Inland" "Ausland"] (str base "Category") "Kategorie")
       (u/info data)
       (p/form-select layout)))
 
 (defn gender [data base layout]
-  (-> {:label "Geschlecht"
-       :data-path  (str base "Gender")
-       :options ["" "female" "male" "other"]}
+  (-> (opt-map ["" "female" "male" "other"] (str base "Gender")  "Geschlecht")
       (u/info data)
       (p/form-select layout)))
 
 (defn lang [data base layout]
-  (-> {:label "Sprache"
-       :data-path  (str base "Lang")
-       :options ["de" "en"]}
+  (-> (opt-map ["de" "en"] (str base "Lang")  "Sprache")
       (u/info data)
       (p/form-select layout)))
 
 
 (defn company-type [data base layout]
-  (-> {:label "Typ"
-       :data-path  (str base "Type")
-       :options ["" "Firma" "DAkkS" "NMI" "NMI/DI" "PTB" "Sonstige"]}
+  (-> (opt-map ["" "Firma" "DAkkS" "NMI" "NMI/DI" "PTB" "Sonstige"] (str base "Type") "Typ")
       (u/info data)
       (p/form-select layout)))
-
 
 (defn contact [data base]
   [(-> {:label "Name"
